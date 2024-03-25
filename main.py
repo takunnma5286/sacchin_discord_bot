@@ -30,6 +30,7 @@ skiplist = ["\n", "、", "。", " ", "　"]
 print(AA)
 
 words = open('words.txt', 'r').read().split("\n")
+dispwords = open('dispwords.txt', 'r').read().split("\n")
 
 def tohira(text):
     kakasi = pykakasi.kakasi()
@@ -51,7 +52,7 @@ async def on_message(message):
         return
     
     if any([msg.find(i) != -1 for i in words]):
-        hitlist = [i for i in words if msg.find(i) != -1]
+        hitlist = [dispwords[i] for i in range(len(words)) if msg.find(words[i]) != -1]
         hitcontent = "".join([f"`{i}`、" for i in hitlist])[0:-1]
         rpmsg = f"あなたのメッセージには破廉恥な言葉、{hitcontent}が含まれていますわ"
         await message.reply(rpmsg)
