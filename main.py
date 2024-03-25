@@ -7,10 +7,7 @@ debug = False
 
 if debug:
     print("デバッグモードがオンです！")
-else:
-    logging.getLogger('discord').setLevel(logging.WARNING)
-    logging.getLogger('discord.http').setLevel(logging.WARNING)
-    logging.getLogger('discord.gateway').setLevel(logging.WARNING)
+    
 
 TOKEN = open('token', 'r').read()
 
@@ -39,8 +36,8 @@ skiplist = ["\n", "、", "。", " ", "　"]
 
 print(AA)
 
-words = open('words.txt', 'r').read().split("\n")
-dispwords = open('dispwords.txt', 'r').read().split("\n")
+words = open('words.txt', 'r', encoding='utf-8').read().split("\n")
+dispwords = open('dispwords.txt', 'r', encoding='utf-8').read().split("\n")
 
 def tohira(text):
     kakasi = pykakasi.kakasi()
@@ -65,6 +62,10 @@ async def on_message(message):
         hitlist = [dispwords[i] for i in range(len(words)) if msg.find(words[i]) != -1]
         hitcontent = "".join([f"`{i}`、" for i in hitlist])[0:-1]
         rpmsg = f"あなたのメッセージには破廉恥な言葉、{hitcontent}が含まれていますわ"
+        print(f"破廉恥な言葉を{len(hitlist)}")
         await message.reply(rpmsg)
 
-client.run(TOKEN)
+if debug:
+    client.run(TOKEN)
+else:
+    client.run(TOKEN, log_handler=None) #初期値がわからない
