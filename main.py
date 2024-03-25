@@ -1,6 +1,16 @@
 import discord
 import pykakasi
 from pyokaka import okaka
+import logging
+
+debug = False
+
+if debug:
+    print("デバッグモードがオンです！")
+else:
+    logging.getLogger('discord').setLevel(logging.WARNING)
+    logging.getLogger('discord.http').setLevel(logging.WARNING)
+    logging.getLogger('discord.gateway').setLevel(logging.WARNING)
 
 TOKEN = open('token', 'r').read()
 
