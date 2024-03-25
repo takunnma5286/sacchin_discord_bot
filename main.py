@@ -62,7 +62,7 @@ async def on_message(message):
         hitlist = [dispwords[i] for i in range(len(words)) if msg.find(words[i]) != -1]
         hitcontent = "".join([f"`{i}`、" for i in hitlist])[0:-1]
         rpmsg = f"あなたのメッセージには破廉恥な言葉、{hitcontent}が含まれていますわ"
-        print(f"破廉恥な言葉を{len(hitlist)}")
+        print(f"破廉恥な言葉を{len(hitlist)}個検出しました！えっち！！")
         await message.reply(rpmsg)
 
 if debug:
